@@ -6,7 +6,7 @@
 #    By: avolgin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/09 18:42:23 by avolgin           #+#    #+#              #
-#    Updated: 2018/02/01 02:45:34 by avolgin          ###   ########.fr        #
+#    Updated: 2018/02/01 02:54:56 by avolgin          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -115,6 +115,7 @@ all: $(NAME)
 
 $(NAME) : $(OBJECT_LIB) $(OBJECT_PRINTF)
 		@ar rc $(NAME) $(OBJECT_LIB) $(OBJECT_PRINTF)
+		@ranlib $(NAME)
 %.o: %.c
 		@gcc  $(FLAGS) -o $@ -c $<
 clean:

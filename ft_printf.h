@@ -6,13 +6,12 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/09 20:21:03 by avolgin           #+#    #+#             */
-/*   Updated: 2018/02/01 01:20:40 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/02/01 04:48:19 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-# define MAX_MULTIBYTE_LENGTH MB_CUR_MAX
 # define MAX(x, y) (((x) > (y)) ? (x) : (y))
 # define PL placeholder
 

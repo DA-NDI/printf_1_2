@@ -1,58 +1,0 @@
-
-ft_printf.h,258
-# define FT_PRINTF_H17,953
-# define MAX_MULTIBYTE_LENGTH 18,974
-typedef struct s_struct24,1321
-	enum			length_field39,1674
-		no 41,1698
-		hh 42,1708
-		h 43,1718
-		l 44,1727
-		ll 45,1736
-		j 46,1746
-		z 47,1755
-		t 48,1764
-}						t_field;50,1787
-
-1.c,17
-int main(17,952
-
-ft_check_types.c,28
-int		ft_check_types(16,941
-
-ft_parse_all.c,148
-void	ft_parse_length(16,941
-void	ft_parse_width(43,1547
-void	ft_parse_flags(71,2012
-void	ft_parse_precision(97,2597
-void	ft_parse_all(125,3098
-
-ft_print_d_i.c,93
-void	ft_put_precision_d_i(17,960
-void	ft_put_length_d_i(25,1158
-int		ft_print_d_i(68,1982
-
-ft_printf.c,82
-int		ft_check_types(18,981
-void	ft_reset_tfield(44,1483
-int		ft_printf(60,1784
-
-main.c,18
-int		main(18,980
-
-test.c,17
-int main 15,912
-
-unicode.c,97
-int		ft_count_bits(18,971
-char    *ft_print_8_to_11(ft_print_8_to_1131,1071
-int main(47,1511
-
-va_test.c,62
-int		sumnum(16,932
-void	printstr(35,1157
-int		main(52,1385
-
-va_test1.c,39
-int		sumnum(16,932
-int		main(35,1157

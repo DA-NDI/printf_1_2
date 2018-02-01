@@ -6,7 +6,7 @@
 #    By: avolgin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/09 18:42:23 by avolgin           #+#    #+#              #
-#    Updated: 2017/12/30 20:35:12 by avolgin          ###   ########.fr        #
+#    Updated: 2018/02/01 02:45:34 by avolgin          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,6 +14,7 @@ NAME = libftprintf.a
 
 SRC_LIB =./libft/ft_atoi.c \
 		./libft/ft_bzero.c \
+		./libft/count_bits.c \
 		./libft/ft_intlen.c \
 		./libft/ft_is_whitespace.c \
 		./libft/ft_isalnum.c \
@@ -22,6 +23,14 @@ SRC_LIB =./libft/ft_atoi.c \
 		./libft/ft_isdigit.c \
 		./libft/ft_isprint.c \
 		./libft/ft_itoa.c \
+		./libft/ft_itoa_unsigned.c \
+		./libft/ft_itoa_base.c \
+		./libft/ft_itoa_base_10_8.c \
+		./libft/ft_itoa_base_10_16.c \
+		./libft/ft_itoa_base_10_16x.c \
+		./libft/ft_itoa_long.c \
+		./libft/ft_itoa_long_long.c \
+		./libft/ft_itoa_long_long_u.c \
 		./libft/ft_lstadd.c \
 		./libft/ft_lstdel.c \
 		./libft/ft_lstdelone.c \
@@ -46,6 +55,7 @@ SRC_LIB =./libft/ft_atoi.c \
 		./libft/ft_putstr.c \
 		./libft/ft_putstr_fd.c \
 		./libft/ft_reverse.c \
+		./libft/ft_reverse_bitwise.c \
 		./libft/ft_rot_n.c \
 		./libft/ft_strcat.c \
 		./libft/ft_strchr.c \
@@ -58,6 +68,9 @@ SRC_LIB =./libft/ft_atoi.c \
 		./libft/ft_striter.c \
 		./libft/ft_striteri.c \
 		./libft/ft_strjoin.c \
+		./libft/ft_strjoin_del.c \
+		./libft/ft_strjoin_del_dest.c \
+		./libft/ft_strjoin_del_all.c \
 		./libft/ft_strlcat.c \
 		./libft/ft_strlen.c \
 		./libft/ft_strmap.c \
@@ -78,7 +91,20 @@ SRC_LIB =./libft/ft_atoi.c \
 		./libft/ft_tolower.c \
 		./libft/ft_toupper.c \
 		./libft/get_next_line.c
-SRC_PRINTF = ft_printf.c ft_parse_all.c
+SRC_PRINTF = ./ft_printf.c \
+		./ft_parse_all.c \
+		./ft_print_d_i.c \
+		./ft_handle_o.c \
+		./ft_handle_u.c \
+		./ft_handle_big_u.c \
+		./ft_handle_big_o.c \
+		./ft_handle_big_d.c \
+		./ft_handle_x.c \
+		./ft_handle_c.c \
+		./ft_handle_s.c \
+		./ft_handle_p.c \
+		./ft_handle_percent.c \
+		./unicode.c
 OBJECT_LIB = $(SRC_LIB:.c=.o)
 
 OBJECT_PRINTF = $(SRC_PRINTF:.c=.o)
@@ -88,12 +114,17 @@ FLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME) : $(OBJECT_LIB) $(OBJECT_PRINTF)
-		ar rc $(NAME) $(OBJECT_LIB) $(OBJECT_PRINTF)
+		@ar rc $(NAME) $(OBJECT_LIB) $(OBJECT_PRINTF)
 %.o: %.c
-		gcc $(FLAGS) -o $@ -c $<
+		@gcc  $(FLAGS) -o $@ -c $<
 clean:
-		/bin/rm -f $(OBJECT_LIB)
-		/bin/rm -f $(OBJECT_PRINTF)
+		@/bin/rm -f $(OBJECT_LIB)
+		@/bin/rm -f $(OBJECT_PRINTF)
 fclean: clean
-		/bin/rm -f $(NAME)
+		@/bin/rm -f ./libft/libft.a
+		@/bin/rm -f $(NAME)
 re:		fclean all
+
+tags:
+		rm -f TAGS
+		etags -e -R *.c *.h

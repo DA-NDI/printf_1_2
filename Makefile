@@ -6,7 +6,7 @@
 #    By: avolgin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/09 18:42:23 by avolgin           #+#    #+#              #
-#    Updated: 2018/02/01 02:54:56 by avolgin          ###   ########.fr        #
+#    Updated: 2018/02/01 03:07:44 by avolgin          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -109,7 +109,7 @@ OBJECT_LIB = $(SRC_LIB:.c=.o)
 
 OBJECT_PRINTF = $(SRC_PRINTF:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 15:49:40 by avolgin           #+#    #+#             */
-/*   Updated: 2018/02/01 03:11:37 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/02/01 03:20:57 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void			ft_handle_c(t_field *placeholder, va_list *ap, int *len, char c)
 
 	null_pos = 0;
 	s = (void*)0;
-	s = ft_put_length_с(placeholder, ap, len, c);
+	s = ft_put_length_c(placeholder, ap, len, c);
 	if (*s == '\0')
 		null_pos = 1;
 	placeholder->plus = 0;

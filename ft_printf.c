@@ -6,40 +6,55 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/09 19:30:40 by avolgin           #+#    #+#             */
-/*   Updated: 2017/12/30 20:27:42 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/01/31 21:39:05 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdlib.h>
-#include <unistd.h>
+
 #include "libft/libft.h"
 #include "ft_printf.h"
 
-
-int		ft_check_types(char **f_copy, __attribute__((unused)) t_field *placeholder, va_list *ap)
+static int	ft_get_types(char **tp)
 {
-	int		d;
-	char	*s;
-
-	s = (void*)0;
-	d = 0;
-	if (**f_copy == 'd' || **f_copy == 'i' || **f_copy == 'D')
+	if (**tp == 'd' || **tp == 'i' || **tp == 'D' || **tp == 's' || **tp == \
+		'S' || **tp == 'u' || **tp == 'U' || **tp == '%' || **tp == 'o' || \
+		**tp == 'O' || **tp == 'x' || **tp == 'X' || **tp == 'c' || **tp == \
+		'C' || **tp == 'p')
 	{
-		d = va_arg(*ap, int);
-		ft_putnbr(d);
-		(*f_copy) += 1;
+		*tp += 1;
 		return (1);
 	}
-	else if (**f_copy == 's')
-	{
-		s = va_arg(*ap, char *);
-		(*f_copy) += 1;
-		ft_putstr(s);
-		return (1);
-	}
-	return (0);
+	else
+		return (0);
 }
 
-void	ft_reset_tfield(t_field *field)
+static int	ft_check_type(char **f_copy, t_field *parser, va_list *ap, int *len)
+{
+	if (**f_copy == 'd' || **f_copy == 'i')
+		ft_print_d_i(parser, ap, len);
+	else if (**f_copy == 'D')
+		ft_handle_big_d(parser, ap, len);
+	else if (**f_copy == 's' || **f_copy == 'S')
+		ft_handle_s(parser, ap, len, **f_copy);
+	else if (**f_copy == 'u')
+		ft_handle_u(parser, ap, len);
+	else if (**f_copy == 'U')
+		ft_handle_big_u(parser, ap, len);
+	else if (**f_copy == '%')
+		ft_handle_percent(parser, len);
+	else if (**f_copy == 'o')
+		ft_handle_o(parser, ap, len);
+	else if (**f_copy == 'O')
+		ft_handle_big_o(parser, ap, len);
+	else if (**f_copy == 'x' || **f_copy == 'X')
+		ft_handle_x(parser, ap, len, **f_copy);
+	else if (**f_copy == 'c' || **f_copy == 'C')
+		ft_handle_c(parser, ap, len, **f_copy);
+	else if (**f_copy == 'p')
+		ft_handle_p(parser, ap, len, 'x');
+	return (ft_get_types(f_copy));
+}
+
+static void	ft_reset_tfield(t_field *field)
 {
 	field->minus = 0;
 	field->plus = 0;
@@ -49,45 +64,49 @@ void	ft_reset_tfield(t_field *field)
 	field->asteriks = 0;
 	field->parameter = 0;
 	field->width = 0;
+	field->zero = 0;
 	field->precision = 0;
 	field->value_width = 0;
 	field->value_precision = 0;
+	field->length = 0;
 }
 
-int		ft_printf(char* format, ...)
+static int	ft_print_all(char *format, va_list *ap, int len)
 {
-	va_list	ap;
-	va_list	ap2;
-	int		d;
-	char	*s;
-	char	*argument;
-	char	*f_copy;
-	t_field placeholder;
+	t_field	*placeholder;
 
-	f_copy = format;
-	s = (void*)0;
-	d = 0;
-	argument = ft_strchr(format, '%') + 1;
-	va_start(ap, format);
-	va_copy(ap2, ap);
-	while (*f_copy)
+	placeholder = (t_field*)malloc(sizeof(t_field));
+	while (*format)
 	{
-		if (*f_copy!= '%')
+		if (*format != '%')
 		{
-			ft_putchar (*f_copy++);
+			ft_putchar(*format++);
+			len++;
 			continue;
 		}
-		while (*++f_copy)
+		while (*++format)
 		{
-			ft_reset_tfield(&placeholder);
-			ft_parse_all(&f_copy, &placeholder, &ap);
-			if (ft_check_types(&f_copy, &placeholder, &ap))
-				break;
-		ft_putchar (*f_copy);
-		break;
+			ft_reset_tfield(placeholder);
+			ft_parse_all(&format, placeholder, ap);
+			if (ft_check_type(&format, placeholder, ap, &len))
+				break ;
+			ft_putchar(*format++);
+			len++;
+			break ;
 		}
 	}
+	free(placeholder);
+	return (len);
+}
 
+int			ft_printf(char *format, ...)
+{
+	va_list	ap;
+	int		len;
+
+	len = 0;
+	va_start(ap, format);
+	len = ft_print_all(format, &ap, len);
 	va_end(ap);
-	return (0);
+	return (len);
 }

@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   1.c                                                :+:      :+:    :+:   */
+/*   ft_handle_percent.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/30 14:27:20 by avolgin           #+#    #+#             */
-/*   Updated: 2017/12/30 15:58:25 by avolgin          ###   ########.fr       */
+/*   Created: 2018/01/22 15:49:40 by avolgin           #+#    #+#             */
+/*   Updated: 2018/01/30 17:16:27 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include "ft_printf.h"
+#include "./libft/libft.h"
 
-int main()
+void	ft_handle_percent(t_field *placeholder, int *len)
 {
-	int i;
+	char	*d;
 
-	i = 1;
-	 wchar_t c = 291;
-//	unsigned	char b = 162;
-	 while (c >>= 1)
-		 i++;
-	 printf ("i = %d\n", i); 
-//	write (1, &b, 1);
-	return (0);
+	d = ft_strdup("%");
+	placeholder->plus = 0;
+	placeholder->precision = 0;
+	placeholder->space = 0;
+	ft_put_flag(&d, placeholder);
+	ft_put_width_d_i(&d, placeholder);
+	ft_putstr(d);
+	*len = *len + ft_strlen(d);
+	free(d);
 }

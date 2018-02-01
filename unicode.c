@@ -5,17 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/16 21:27:38 by avolgin           #+#    #+#             */
-/*   Updated: 2017/12/21 17:36:13 by avolgin          ###   ########.fr       */
+/*   Created: 2018/01/30 18:42:44 by avolgin           #+#    #+#             */
+/*   Updated: 2018/02/01 00:44:30 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
-#include <wchar.h>
+#include "ft_printf.h"
+#include "./libft/libft.h"
 
-int		ft_count_bits(int z)
+static int		ft_count_bits(int z)
 {
 	int		i;
 
@@ -28,49 +26,82 @@ int		ft_count_bits(int z)
 	return (i);
 }
 
-char    *ft_print_8_to_11(int c)
+static void		ft_print_8_to_11(unsigned int c, unsigned char **res)
 {
-    unsigned int    11byte_mask;
-    unsigned char   recover_first_6_bits;
-    unsigned char   recover_last_5_bits;
-    unsigned char   a;
+	unsigned int	byte_mask_11;
+	unsigned char	recover_first_6_bits;
+	unsigned char	recover_last_5_bits;
+	unsigned char	a;
 
-    11byte_mask = 0xC080;
-    recover_first_6_bits = (c << 26) >> 26;
-    recover_last_5_bits = ((c >> 6) << 27) >> 27;
-	a = (11byte_mask >> 8) | recover_last_5_bits;
-	write (1, &a, 1);
-	a = ((11byte_mask << 24) >> 24) | recover_rirst_6_bits;
-	write (1, &a, 1);
+	byte_mask_11 = 0xC080;
+	recover_first_6_bits = (c << 26) >> 26;
+	recover_last_5_bits = ((c >> 6) << 27) >> 27;
+	a = (byte_mask_11 >> 8) | recover_last_5_bits;
+	(*res)[0] = a;
+	a = ((byte_mask_11 << 24) >> 24) | recover_first_6_bits;
+	(*res)[1] = a;
+	(*res)[2] = '\0';
 }
 
-int main()
+static void		ft_print_12_to_16(unsigned int c, unsigned char **res)
 {
-    unsigned char   a;
-    int     c;
-    int     size;
+	unsigned int	byte_mask_16;
+	unsigned char	a;
 
-    c = 15;
-    size = 0;
-    a = 0;
-    size = ft_count_bits(c);
-    printf ("size = %d\n", size);
-    if (size <= 7)
-    {
-        a = c;
-        write (1, &a, 1);
-        return (0);
-    }
-    if (size <= 11 && size > 7)
-    {
-		ft_print_8_to_11(c);
-		return (0);
-	}
-    if (size <= 16 && size > 11)
-    {
-		ft_print_12_to_16(c);
-		return (0);
-	}
-	return (0);
+	byte_mask_16 = 0xE08080;
+	a = (byte_mask_16 >> 16) | ((c >> 12) << 28) >> 28;
+	(*res)[0] = a;
+	a = ((byte_mask_16 << 16) >> 24) | ((c >> 6) << 26) >> 26;
+	(*res)[1] = a;
+	a = (c << 26) >> 26 | ((byte_mask_16 << 24) >> 24);
+	(*res)[2] = a;
 }
 
+static void		ft_print_17(unsigned int c, unsigned char **res)
+{
+	unsigned int	byte_mask_32;
+	unsigned char	recover_s_6_bits;
+	unsigned char	recover_t_6_bits;
+	unsigned char	recover_l_3_bits;
+	unsigned char	a;
+
+	byte_mask_32 = 0xF0808080;
+	recover_s_6_bits = ((c >> 6) << 26) >> 26;
+	recover_t_6_bits = ((c >> 12) << 26) >> 26;
+	recover_l_3_bits = ((c >> 18) << 29) >> 29;
+	a = (byte_mask_32 >> 24) | recover_l_3_bits;
+	(*res)[0] = a;
+	a = ((byte_mask_32 << 8) >> 24) | recover_t_6_bits;
+	(*res)[1] = a;
+	a = (byte_mask_32 << 16) >> 24 | recover_s_6_bits;
+	(*res)[2] = a;
+	a = (byte_mask_32 << 24) >> 24 | (c << 26) >> 26;
+	(*res)[3] = a;
+	(*res)[4] = '\0';
+}
+
+unsigned char	*ft_handle_unicode_c(wchar_t d, __attribute__((unused))int *len)
+{
+	unsigned char	a;
+	unsigned int	c;
+	int				size;
+	unsigned char	*result;
+
+	result = (unsigned char*)ft_strnew(5);
+	c = d;
+	size = 0;
+	size = ft_count_bits(c);
+	if (size <= 7 || MB_CUR_MAX < 2)
+	{
+		a = c;
+		result[0] = a;
+		result[1] = '\0';
+	}
+	else if (size <= 11 && size > 7)
+		ft_print_8_to_11(c, &result);
+	else if (size <= 16 && size > 11)
+		ft_print_12_to_16(c, &result);
+	else
+		ft_print_17(c, &result);
+	return (result);
+}

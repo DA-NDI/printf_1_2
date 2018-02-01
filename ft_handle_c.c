@@ -6,14 +6,14 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 15:49:40 by avolgin           #+#    #+#             */
-/*   Updated: 2018/02/01 03:20:57 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/02/01 03:35:18 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "./libft/libft.h"
 
-static unsigned char	*ft_put_length_c(t_field *pars, va_list *ap, int *len, char c)
+unsigned char	*ft_put_length_c(t_field *pars, va_list *ap, int *len, char c)
 {
 	wchar_t			d;
 	unsigned char	*ret;

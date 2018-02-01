@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 18:42:44 by avolgin           #+#    #+#             */
-/*   Updated: 2018/02/01 00:44:30 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/02/01 03:34:39 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,14 @@ static void		ft_print_17(unsigned int c, unsigned char **res)
 	(*res)[4] = '\0';
 }
 
-unsigned char	*ft_handle_unicode_c(wchar_t d, __attribute__((unused))int *len)
+unsigned char	*ft_handle_unicode_c(wchar_t d, int *len)
 {
 	unsigned char	a;
 	unsigned int	c;
 	int				size;
 	unsigned char	*result;
 
+	len = 0;
 	result = (unsigned char*)ft_strnew(5);
 	c = d;
 	size = 0;

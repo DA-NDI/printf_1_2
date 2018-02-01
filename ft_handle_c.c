@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 15:49:40 by avolgin           #+#    #+#             */
-/*   Updated: 2018/02/01 05:18:28 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/02/01 05:20:30 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ unsigned char	*ft_put_length_c(t_field *pars, va_list *ap, int *len, char c)
 
 	ret = (void*)0;
 	d = 0;
-	if (pars->length || c == 'c' || c == 'C' || c == 'S')
+	if (pars->length != l && c == 'c')
 	{
 		ret = (unsigned char*)ft_strnew(1);
 		*ret = (unsigned char)(va_arg(*ap, unsigned int));

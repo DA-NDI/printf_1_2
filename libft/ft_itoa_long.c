@@ -1,26 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   ft_itoa_long.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/02 17:26:39 by avolgin           #+#    #+#             */
-/*   Updated: 2018/01/20 19:52:43 by avolgin          ###   ########.fr       */
+/*   Created: 2017/11/05 16:02:03 by avolgin           #+#    #+#             */
+/*   Updated: 2018/01/20 19:50:04 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdlib.h>
+#include "libft.h"
 
-char	*ft_strnew(size_t size)
+char	*ft_itoa_long(long int n)
 {
-	char	*new;
+	char			*result;
+	long int		sign;
+	unsigned int	i;
+	long int		a;
 
-	new = (char*)malloc(sizeof(char) * (size + 1));
-	if (!new)
+	a = (long int)n;
+	if (!(result = ft_strnew(ft_intlen(n))))
 		return (NULL);
-	else
-		ft_bzero(new, size + 1);
-	return (new);
+	i = 0;
+	if (a == 0)
+		return (ft_strzero(result));
+	if ((sign = a) < 0)
+		a = -a;
+	while (a > 0)
+	{
+		result[i] = a % 10 + '0';
+		i++;
+		a = a / 10;
+	}
+	if (sign < 0)
+		result[i++] = '-';
+	result[i] = '\0';
+	return (ft_reverse(result));
 }

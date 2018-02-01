@@ -6,7 +6,7 @@
 #    By: avolgin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/26 15:09:52 by avolgin           #+#    #+#              #
-#    Updated: 2017/12/12 16:27:36 by avolgin          ###   ########.fr        #
+#    Updated: 2018/01/31 22:06:43 by avolgin          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -23,7 +23,11 @@ ft_strjoin.c ft_strtrim.c ft_strsplit.c ft_itoa.c ft_reverse.c ft_intlen.c \
 ft_strzero.c ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c \
 ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c \
 ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c \
-ft_is_whitespace.c ft_pow.c ft_rot_n.c get_next_line.c
+ft_is_whitespace.c ft_pow.c ft_rot_n.c get_next_line.c ft_itoa_long.c \
+ft_itoa_long_long.c ft_strjoin_del.c ft_itoa_base.c ft_itoa_base_10_8.c \
+ft_reverse_bitwise.c ft_itoa_unsigned.c ft_itoa_long_long_u.c \
+ft_itoa_base_10_16.c ft_itoa_base_10_16x.c ft_swap_bits.c \
+count_bits.c ft_strjoin_del_dest.c ft_strjoin_del_all.c \
 
 OBJECT = $(SOURCE:.c=.o)
 

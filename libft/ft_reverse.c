@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 17:35:42 by avolgin           #+#    #+#             */
-/*   Updated: 2017/11/06 17:47:24 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/01/23 19:15:51 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ char	*ft_reverse(char *s)
 	int		c;
 
 	i = 0;
-	if (!s)
-		return (NULL);
+	if (s[0] == '\0')
+		return (s);
 	length = ft_strlen(s) - 1;
 	while (i < length)
 	{

@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   ft_reverse_bitwise.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/02 17:26:39 by avolgin           #+#    #+#             */
-/*   Updated: 2018/01/20 19:52:43 by avolgin          ###   ########.fr       */
+/*   Created: 2018/01/26 11:58:03 by avolgin           #+#    #+#             */
+/*   Updated: 2018/01/30 17:23:37 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "libft.h"
-#include <stdlib.h>
 
-char	*ft_strnew(size_t size)
+char	*ft_reverse_bitwise(char *str)
 {
-	char	*new;
+	int		last;
+	int		i;
 
-	new = (char*)malloc(sizeof(char) * (size + 1));
-	if (!new)
-		return (NULL);
-	else
-		ft_bzero(new, size + 1);
-	return (new);
+	i = 0;
+	last = ft_strlen(str) - 1;
+	if (!str || !*str || last == -1)
+		return (str);
+	while (i < last)
+	{
+		str[i] ^= str[last];
+		str[last] ^= str[i];
+		str[i] ^= str[last];
+		i++;
+		last--;
+	}
+	return (str);
 }

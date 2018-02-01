@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   ft_itoa_base_10_8.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/02 17:26:39 by avolgin           #+#    #+#             */
-/*   Updated: 2018/01/20 19:52:43 by avolgin          ###   ########.fr       */
+/*   Created: 2018/01/23 18:37:37 by avolgin           #+#    #+#             */
+/*   Updated: 2018/01/30 17:43:36 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-char	*ft_strnew(size_t size)
+char	*ft_itoa_base_10_8(unsigned long long nbr)
 {
-	char	*new;
+	char	*result;
+	int		bits;
+	int		result_len;
+	int		i;
 
-	new = (char*)malloc(sizeof(char) * (size + 1));
-	if (!new)
-		return (NULL);
-	else
-		ft_bzero(new, size + 1);
-	return (new);
+	i = 0;
+	bits = count_bits(nbr);
+	result_len = (bits % 3 == 0) ? (bits / 3) : ((bits / 3) + 1);
+	result = ft_strnew(result_len);
+	while (i < result_len)
+	{
+		result[i] = (nbr & 7) + '0';
+		nbr >>= 3;
+		i++;
+	}
+	ft_reverse_bitwise(result);
+	return (result);
 }

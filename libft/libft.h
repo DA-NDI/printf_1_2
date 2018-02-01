@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 17:39:56 by avolgin           #+#    #+#             */
-/*   Updated: 2017/12/12 16:28:35 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/01/31 22:07:03 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,25 @@ void				ft_putendl(char const *s);
 void				ft_putstr(char const *s);
 void				ft_putchar(char c);
 char				*ft_strzero(char *str);
-size_t				ft_intlen(int nbr);
+int					count_bits(unsigned long long nbr);
+size_t				ft_intlen(long long int nbr);
 char				*ft_reverse(char *s);
+char				*ft_reverse_bitwise(char *s);
 char				*ft_itoa(int n);
+char				*ft_itoa_unsigned(unsigned int n);
+char				*ft_itoa_base(int value, int base);
+char				*ft_itoa_base_10_8(unsigned long long int nbr);
+char				*ft_itoa_base_10_16(unsigned long long int nbr);
+char				*ft_itoa_base_10_16x(unsigned long long int nbr);
+char				*ft_itoa_long(long int n);
+char				*ft_itoa_long_long(long long int n);
+char				*ft_itoa_long_long_u(long long int n);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_strtrim(char const *s);
 char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strjoin_del(char *s1, char *s2);
+char				*ft_strjoin_del_dest(char *s1, char *s2);
+char				*ft_strjoin_del_all(char *s1, char *s2);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
 int					ft_strequ(char const *s1, char const *s2);

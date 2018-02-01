@@ -1,36 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_intlen.c                                        :+:      :+:    :+:   */
+/*   ft_itoa_long_long.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/06 17:57:18 by avolgin           #+#    #+#             */
-/*   Updated: 2018/01/20 20:34:17 by avolgin          ###   ########.fr       */
+/*   Created: 2017/11/05 16:02:03 by avolgin           #+#    #+#             */
+/*   Updated: 2018/01/27 16:27:04 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
-#include <string.h>
 
-size_t	ft_intlen(long long int nbr)
+char	*ft_itoa_long_long(long long int n)
 {
-	size_t					i;
+	char					*result;
+	long long int			sign;
+	unsigned int			i;
 	unsigned long long int	a;
 
-	if (nbr < 0 && nbr + 1 != -9223372036854775807)
-		a = -nbr;
-	else
-		a = (nbr + 1 == -9223372036854775807) ? 9223372036854775807 + 1 : nbr;
+	a = (n + 1 == -9223372036854775807) ? 9223372036854775807 + 1 : n;
+	if (!(result = ft_strnew(ft_intlen(n))))
+		return (NULL);
 	i = 0;
 	if (a == 0)
-		return (1);
-	if (nbr < 0)
-		i++;
+		return (ft_strzero(result));
+	if ((sign = a) < 0)
+		a = -a;
 	while (a > 0)
 	{
-		a = a / 10;
+		result[i] = a % 10 + '0';
 		i++;
+		a = a / 10;
 	}
-	return (i);
+	if (sign < 0 || n + 1 == -9223372036854775807)
+		result[i++] = '-';
+	result[i] = '\0';
+	return (ft_reverse(result));
 }

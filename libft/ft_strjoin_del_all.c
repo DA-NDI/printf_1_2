@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin_del_all.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/02 17:26:39 by avolgin           #+#    #+#             */
-/*   Updated: 2018/01/20 19:52:43 by avolgin          ###   ########.fr       */
+/*   Created: 2018/01/14 16:00:28 by avolgin           #+#    #+#             */
+/*   Updated: 2018/01/31 22:08:01 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-char	*ft_strnew(size_t size)
+char	*ft_strjoin_del_all(char *dest, char *src)
 {
-	char	*new;
+	char	*s;
 
-	new = (char*)malloc(sizeof(char) * (size + 1));
-	if (!new)
-		return (NULL);
-	else
-		ft_bzero(new, size + 1);
-	return (new);
+	s = ft_strjoin(dest, src);
+	ft_strdel(&dest);
+	ft_strdel(&src);
+	return (s);
 }

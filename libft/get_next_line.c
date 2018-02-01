@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 17:42:28 by avolgin           #+#    #+#             */
-/*   Updated: 2017/12/12 17:08:15 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/01/20 20:41:26 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static t_list	*ft_get_fd(t_list **buff, int fd)
 	return (temp);
 }
 
-int				read_fd(t_list **buff, int fd)
+static int		read_fd(t_list **buff, int fd)
 {
 	char	*tmp;
 	int		ret;
@@ -57,7 +57,7 @@ int				read_fd(t_list **buff, int fd)
 	return (ret == -1) ? 0 : 1;
 }
 
-int				write_slash_n_to_buff(t_list **buff)
+static int		write_slash_n_to_buff(t_list **buff)
 {
 	char	*ptr;
 

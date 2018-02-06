@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 17:39:56 by avolgin           #+#    #+#             */
-/*   Updated: 2018/01/31 22:07:03 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/02/06 12:03:21 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char				*ft_itoa_base_10_16(unsigned long long int nbr);
 char				*ft_itoa_base_10_16x(unsigned long long int nbr);
 char				*ft_itoa_long(long int n);
 char				*ft_itoa_long_long(long long int n);
-char				*ft_itoa_long_long_u(long long int n);
+char				*ft_itoa_long_long_u(unsigned long long int n);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_strtrim(char const *s);
 char				*ft_strjoin(char const *s1, char const *s2);

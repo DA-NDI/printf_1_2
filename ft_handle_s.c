@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 15:49:40 by avolgin           #+#    #+#             */
-/*   Updated: 2018/02/01 01:42:30 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/02/06 12:55:41 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	ft_handle_s(t_field *pars, va_list *ap, int *len, char c)
 	{
 		s = (pars->value_precision < 6 && pars->precision) ? \
 		ft_strsub("(null)", 0, pars->value_precision) : ft_strdup("(null)");
+		ft_put_width_s(&s, pars);
 		ft_putstr(s);
 		*len = *len + ft_strlen(s);
 		free(s);

@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 18:10:22 by avolgin           #+#    #+#             */
-/*   Updated: 2018/02/01 00:34:43 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/02/06 12:47:38 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,12 @@ static void	ft_put_precision_d_i(char **s, t_field *placeholder)
 		len_s = (size_t)(placeholder->value_precision) - ft_strlen(*s);
 		len_s = (**s == '-') ? len_s + 2 : len_s;
 		s_zero = ft_strnew(len_s + 1);
+		if (len_s)
+		{
 		while (len_s--)
 			s_zero[i++] = '0';
 		s_zero[0] = (**s == '-') ? '-' : '0';
+		}
 		*s = (**s == '-') ? ft_strjoin_del_dest(s_zero, *s + 1) : \
 			ft_strjoin_del_dest(s_zero, *s);
 		ft_strdel(&free_me);

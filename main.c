@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/09 20:19:06 by avolgin           #+#    #+#             */
-/*   Updated: 2018/02/06 10:28:59 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/02/06 12:56:22 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,8 @@ ft_printf("%1.5d\n", -12345);
 	 k = 0;
 	printf ("return value printf = %d\n", printf("|%Lo|", &k));
 	printf ("return value ft_printf = %d\n", ft_printf("|%Lo|", &k));
-	printf ("return value printf = %d\n", printf("|%5.4u|", -25));
-	printf ("return value ft_printf = %d\n", ft_printf("|%5.4u|", -25));
+	printf ("================= = %d\n", printf("|%5.4u|", -25));
+	printf ("================ = %d\n", ft_printf("|%5.4u|", -25));
 	printf ("return value printf = %d\n", printf("|%u|", -2147483648));
 	printf ("return value ft_printf = %d\n", ft_printf("|%u|", -2147483648));
 	printf ("return value printf = %d\n", printf("|%lu|", -2147483648));
@@ -269,8 +269,8 @@ ft_printf("%1.5d\n", -12345);
 	ft_printf("%05c\n", 0);
 	ft_printf("%5c\n", 42);
 	ft_printf("%-5c\n", 42);
-	printf ("return value printf = %d\n", printf("%2c\n", 0));
-	printf ("return value ft_printf = %d\n", ft_printf("%2c\n", 0));
+	printf ("return1 value printf = %d\n", printf("%2c\n", 0));
+	printf ("return1 value ft_printf = %d\n", ft_printf("%2c\n", 0));
 	printf ("return value printf = %d\n", printf("%lu", -42));
 	printf ("return value ft_printf = %d\n", ft_printf("%lu", -42));
 	ft_printf ("hey!!%lu\n", -42);
@@ -290,6 +290,8 @@ ft_printf("%1.5d\n", -12345);
 	/*mouli 79 */
 	printf ("return value printf = %d\n", printf("{%05.s}", 0));
 	printf ("return value ft_printf = %d\n", ft_printf("{%05.s}", 0));
+	printf ("return value printf = %d\n", printf("|%05.2i|", 42));
+	printf ("return value ft_printf = %d\n", ft_printf("|%05.2i|", 42));
 	
 	
 //_DATE_ current dat

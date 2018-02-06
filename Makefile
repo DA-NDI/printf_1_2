@@ -6,7 +6,7 @@
 #    By: avolgin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/09 18:42:23 by avolgin           #+#    #+#              #
-#    Updated: 2018/02/01 05:08:28 by avolgin          ###   ########.fr        #
+#    Updated: 2018/02/06 16:47:27 by avolgin          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -74,6 +74,7 @@ SRC_LIB =./libft/ft_atoi.c \
 		./libft/ft_strjoin_del_all.c \
 		./libft/ft_strlcat.c \
 		./libft/ft_strlen.c \
+		./libft/ft_strlen_w.c \
 		./libft/ft_strmap.c \
 		./libft/ft_strmapi.c \
 		./libft/ft_strncat.c \

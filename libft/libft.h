@@ -6,13 +6,14 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 17:39:56 by avolgin           #+#    #+#             */
-/*   Updated: 2018/02/06 13:41:01 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/02/06 16:53:47 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <string.h>
+# include <stdlib.h>
 
 typedef	struct		s_list
 {
@@ -97,6 +98,7 @@ void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				*ft_memccpy(void *dst, const void *src, int c, size_t n);
 char				*ft_strcpy(char *dest, char *srt);
 size_t				ft_strlen(const char *str);
+int					ft_strlen_w(wchar_t *str);
 char				*ft_strdup(char *str);
 char				*ft_strncpy(char *dest, const char *str, size_t len);
 char				*ft_strcat(char *s1, const char *s2);

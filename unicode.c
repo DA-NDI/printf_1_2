@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 18:42:44 by avolgin           #+#    #+#             */
-/*   Updated: 2018/02/01 03:33:16 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/02/06 16:40:14 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ unsigned char	*ft_handle_unicode_c(wchar_t d, int *len)
 	unsigned char	*result;
 
 	len = 0;
-	result = (unsigned char*)ft_strnew(5);
+	result = (unsigned char*)ft_strnew(4);
 	c = d;
 	size = 0;
 	size = ft_count_bits(c);
@@ -97,6 +97,7 @@ unsigned char	*ft_handle_unicode_c(wchar_t d, int *len)
 		a = c;
 		result[0] = a;
 		result[1] = '\0';
+		return (result);
 	}
 	else if (size <= 11 && size > 7)
 		ft_print_8_to_11(c, &result);

@@ -6,58 +6,67 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 15:49:40 by avolgin           #+#    #+#             */
-/*   Updated: 2018/02/06 12:55:41 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/02/06 17:14:20 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "./libft/libft.h"
 
-int		ft_strlen_w(wchar_t *str)
+static char	*ft_handle_wchar_exc(int length, wchar_t *a, int *len, t_field *pl)
 {
+	char	*d;
+	char	*free_me;
 	int		i;
 
-	if (!str)
-		return (0);
 	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
+	d = ft_strnew(1);
+	while (length--)
+	{
+		free_me = (char*)ft_handle_unicode_c(a[i++], len);
+		d = ft_strjoin_del_dest(d, free_me);
+		if (pl->precision && \
+			(pl->value_precision - (int)ft_strlen(d)) < 0)
+		{
+			d[ft_strlen(d) - ft_strlen(free_me)] = '\0';
+			ft_strdel(&free_me);
+			return (d);
+		}
+		ft_strdel(&free_me);
+	}
+	return (d);
 }
 
-void	ft_put_precision_s(char **s, t_field *placeholder)
+void		ft_put_precision_s(char **s, t_field *placeholder)
 {
 	if (placeholder->precision &&
 		(size_t)(placeholder->value_precision) < ft_strlen(*s))
 		*(*s + placeholder->value_precision) = '\0';
 }
 
-char	*ft_put_length_s(t_field *placeholder, va_list *ap, int *len, char c)
+char		*ft_put_length_s(t_field *pl, va_list *ap, int *len, char c)
 {
 	char	*d;
 	wchar_t	*a;
 	int		length;
 	int		i;
 
-	i = 0;
 	d = (void*)0;
-	a = (void*)0;
-	if (placeholder->length != l && c == 's')
+	i = 0;
+	if (pl->length != l && c == 's')
 		d = (char*)(va_arg(*ap, unsigned int*));
-	else if (placeholder->length == l || c == 'S')
+	else if (pl->length == l || c == 'S')
 	{
 		a = va_arg(*ap, wchar_t*);
 		length = ft_strlen_w(a);
 		if (a == NULL)
 			return (d);
-		d = ft_strnew(1);
-		while (length--)
-			d = ft_strjoin_del_all(d, (char*)ft_handle_unicode_c(a[i++], len));
+		d = ft_handle_wchar_exc(length, a, len, pl);
 	}
 	return (d);
 }
 
-void	ft_put_width_s(char **s, t_field *pars)
+void		ft_put_width_s(char **s, t_field *pars)
 {
 	char	*s_pad;
 	int		len_s;
@@ -86,7 +95,7 @@ void	ft_put_width_s(char **s, t_field *pars)
 	}
 }
 
-void	ft_handle_s(t_field *pars, va_list *ap, int *len, char c)
+void		ft_handle_s(t_field *pars, va_list *ap, int *len, char c)
 {
 	char	*s;
 	char	*d;

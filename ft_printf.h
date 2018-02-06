@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/09 20:21:03 by avolgin           #+#    #+#             */
-/*   Updated: 2018/02/01 04:48:19 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/02/01 04:47:38 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 # include <stdlib.h>
 # include <stdarg.h>
-# include <locale.h>
 # include <string.h>
 # include <unistd.h>
 

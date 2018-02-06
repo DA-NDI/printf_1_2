@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 15:49:40 by avolgin           #+#    #+#             */
-/*   Updated: 2018/02/01 17:33:14 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/02/01 17:50:11 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,17 @@ void			ft_put_hash_o(char **s, t_field *placeholder)
 
 unsigned long	ft_put_length_u(t_field *placeholder, va_list *ap)
 {
-	unsigned long	d;
+	long	d;
 
 	d = 0;
 	if (!placeholder->length)
-		d = va_arg(*ap, unsigned long);
+		d = va_arg(*ap, unsigned int);
 	else if (placeholder->length == h)
-		d = (unsigned short)(va_arg(*ap, unsigned long));
+		d = (unsigned short)(va_arg(*ap, unsigned int));
 	else if (placeholder->length == hh)
-		d = (unsigned char)(va_arg(*ap, unsigned long));
+		d = (unsigned char)(va_arg(*ap, unsigned int));
 	else
-		d = va_arg(*ap, unsigned long);
+		d = va_arg(*ap, long);
 	return (d);
 }
 

@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/09 20:19:06 by avolgin           #+#    #+#             */
-/*   Updated: 2018/02/06 12:56:22 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/02/06 13:07:33 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,6 +292,10 @@ ft_printf("%1.5d\n", -12345);
 	printf ("return value ft_printf = %d\n", ft_printf("{%05.s}", 0));
 	printf ("return value printf = %d\n", printf("|%05.2i|", 42));
 	printf ("return value ft_printf = %d\n", ft_printf("|%05.2i|", 42));
+	printf ("return value printf = %d\n", printf("|%10.s|", NULL));
+	printf ("return value ft_printf = %d\n", ft_printf("|%10.s|", NULL));
+	printf ("return value printf = %d\n", printf("|%-10.s|", NULL));
+	printf ("return value ft_printf = %d\n", ft_printf("|%-10.s|", NULL));
 	
 	
 //_DATE_ current dat

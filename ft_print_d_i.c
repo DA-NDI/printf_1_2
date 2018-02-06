@@ -6,7 +6,7 @@
 /*   By: avolgin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/02 18:10:22 by avolgin           #+#    #+#             */
-/*   Updated: 2018/02/06 12:47:38 by avolgin          ###   ########.fr       */
+/*   Updated: 2018/02/06 13:57:55 by avolgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,6 @@ static void	ft_put_precision_d_i(char **s, t_field *placeholder)
 
 	free_me = *s;
 	i = 0;
-	if (placeholder->precision && !placeholder->value_precision && **s == '0')
-	{
-		*s = ft_strnew(1);
-		ft_strdel(&free_me);
-	}
 	if (placeholder->precision && placeholder->value_precision > 0 &&
 		(size_t)(placeholder->value_precision) >= ft_strlen(*s))
 	{
@@ -72,9 +67,9 @@ static void	ft_put_precision_d_i(char **s, t_field *placeholder)
 		s_zero = ft_strnew(len_s + 1);
 		if (len_s)
 		{
-		while (len_s--)
-			s_zero[i++] = '0';
-		s_zero[0] = (**s == '-') ? '-' : '0';
+			while (len_s--)
+				s_zero[i++] = '0';
+			s_zero[0] = (**s == '-') ? '-' : '0';
 		}
 		*s = (**s == '-') ? ft_strjoin_del_dest(s_zero, *s + 1) : \
 			ft_strjoin_del_dest(s_zero, *s);
@@ -104,9 +99,16 @@ static void	ft_put_length_d_i(char **s, t_field *placeholder, va_list *ap)
 int			ft_print_d_i(t_field *placeholder, va_list *ap, int *len)
 {
 	char	*s;
+	char	*free_me;
 
 	s = (void*)0;
 	ft_put_length_d_i(&s, placeholder, ap);
+	free_me = s;
+	if (placeholder->precision && !placeholder->value_precision && *s == '0')
+	{
+		s = ft_strnew(1);
+		ft_strdel(&free_me);
+	}
 	ft_put_precision_d_i(&s, placeholder);
 	ft_put_flag(&s, placeholder);
 	ft_put_width_d_i(&s, placeholder);
